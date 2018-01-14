@@ -2,13 +2,15 @@ from setuptools import setup
 
 setup(
     name = 'forkparser',
-    version = '6.0.0',
-    description = 'A fork of Universal feed parser, handles RSS 0.9x, RSS 1.0, '
+    version = '6.0.0.post0',
+    description = 'A hopefully temporary fork of Universal Feed Parser, which handles RSS 0.9x, RSS 1.0, '
                   'RSS 2.0, CDF, Atom 0.3, and Atom 1.0 feeds',
     author = 'Kurt McKee',
     author_email = 'contactme@kurtmckee.org',
-    url = 'https://github.com/kurtmckee/feedparser',
-    download_url = 'https://pypi.python.org/pypi/feedparser',
+    maintainer = 'Tom Most',
+    maintainer_email = 'forkparser@freecog.net',
+    url = 'https://github.com/twm/feedparser',
+    download_url = 'https://pypi.python.org/pypi/forkparser',
     platforms = ['POSIX', 'Windows'],
     packages = ['feedparser', 'feedparser.datetimes', 'feedparser.namespaces', 'feedparser.parsers'],
     install_requires = [
