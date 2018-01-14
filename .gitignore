@@ -2,4 +2,6 @@
 .tox/
 dist/
 env/
-feedparser.egg-info/
+__pycache__
+*.egg-info/
+/build/
