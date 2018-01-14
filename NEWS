@@ -1,4 +1,8 @@
-coming in the next release:
+forkparser-6.0.0.post1
+    * Update package metadata and readme to clarify ownership and reasons for the fork
+    * Add compatibility notes to this NEWS file
+
+forkparser-6.0.0
     * Support Python 3.5
     * Convert feedparser from a monolithic file to a package
          * The ``feedparser.SANITIZE_HTML`` flag has moved to ``feedparser.api.SANITIZE_HTML``.
