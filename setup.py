@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name = 'forkparser',
-    version = '6.0.0.post0',
+    version = '6.1.0',
     description = 'A hopefully temporary fork of Universal Feed Parser, which handles RSS 0.9x, RSS 1.0, '
                   'RSS 2.0, CDF, Atom 0.3, and Atom 1.0 feeds',
     author = 'Kurt McKee',
