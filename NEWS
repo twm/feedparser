@@ -3,7 +3,7 @@ forkparser-6.1.0
     * ``feedparser.parse(sanitize_html=bool)`` argument replaces the ``feedparser.SANITIZE_HTML`` global
     * ``feedparser.parse(resolve_relative_uris=bool)`` replaces the ``feedparser.RESOLVE_RELATIVE_URIS`` global
 
-forkparser-6.0.0.post1
+forkparser-6.0.0.post0
     * Update package metadata and readme to clarify ownership and reasons for the fork
     * Add compatibility notes to this NEWS file
 
