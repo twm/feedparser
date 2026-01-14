@@ -1,6 +1,6 @@
 [project]
-name = "feedparser"
-version = "6.0.11"
+name = "forkparser"
+version = "2026.1.0"
 description = "Parse Atom/RSS/JSON feeds in Python"
 readme = "README.rst"
 requires-python = ">=3.10"
@@ -28,6 +28,10 @@ Changelog = "https://feedparser.readthedocs.io/en/latest/changelog/"
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
 
+[tool.poetry]
+packages = [
+    { include = "feedparser" }
+]
 
 # coverage
 # --------

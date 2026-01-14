@@ -1,4 +1,0 @@
-Project development
--------------------
-
-*   Test building the documentation.

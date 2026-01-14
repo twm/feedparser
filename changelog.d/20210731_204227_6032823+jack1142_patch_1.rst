@@ -1,4 +1,0 @@
-Fixed
------
-
-*   Stack level for feedparser's deprecation warnings is now correctly set (#273)

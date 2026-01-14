@@ -1,4 +1,0 @@
-Documentation
--------------
-
-*   Replace the individual change history pages in the documentation with the full CHANGELOG.

@@ -20,6 +20,259 @@ Please see the fragment files in the `changelog.d directory`_.
 
 ..  scriv-insert-here
 
+.. _changelog-2026.1.0:
+
+2026.1.0 - 2026-01-13
+=====================
+
+Python support
+--------------
+
+*   Support Python 3.11.
+*   Drop support for Python 3.6.
+
+*   Drop support for Python 3.7.
+
+*   Support Python 3.12 and 3.13.
+
+*   Drop Python 3.8 support.
+
+*   Support PyPy 3.10.
+
+*   Support PyPy 3.11.
+
+*   Drop support for PyPy 3.10.
+
+*   Drop Python 3.9 support.
+*   Begin testing Python 3.14 beta releases.
+
+Added
+-----
+
+*   Added typing support (#253)
+
+*   Resolve relative URLs in ``srcset`` attributes and pass through ``srcset`` when sanitizing.
+
+*   Support JSON feeds. (#103)
+
+Fixed
+-----
+
+*   Stack level for feedparser's deprecation warnings is now correctly set (#273)
+
+*   Fix a bug that prevented JSON feeds from being parsed.
+
+    A comparison was failing due to incompatible types,
+    which allowed XML declarations to be added to JSON feeds.
+
+*   Fallback to JSON feed parsing if the XML parsers completely fail.
+
+*   Fix a bug that allowed Atom entry ``<link>`` tags without an ``href`` attribute
+    to be set as the entry ``link`` unconditionally.
+
+Removed
+-------
+
+*   ``feedparser.parse()`` no longer accepts parameters that customize HTTP requests.
+
+    See the "Breaking changes" section for more information.
+
+*   URLs using a ``feed://``, ``file://``, or ``ftp://`` scheme are no longer supported.
+
+    See the "Breaking changes" section for more information.
+
+Changed
+-------
+
+*   Rename the JSON parser class to ``JSONParser``.
+*   Rename the base feedparser exception to ``FeedparserError``.
+*   Use full sentences in comments.
+*   Fix some PEP8 issues throughout the code.
+*   Remove unnecessary underscore prefixes from classes and functions.
+*   Drop some Python 2 compatibility code.
+    For example, classes no longer explicitly inherit from ``object``.
+
+*   Use only a prefix of the feed to detect encodings,
+    instead of reading the whole feed in memory.
+    This reduces the memory usage of parse() by up to ~3x (66-73%),
+    but may result in the wrong encoding being detected in rare cases;
+    use ``feedparser.parse(optimistic_encoding_detection=False)``
+    to get the original behavior (read the whole feed in memory).
+    (#296, #302)
+
+*   Replace feedparser's custom HTTP client code with the ``requests`` package.
+*   Set the ``status`` result key to the final HTTP status code returned.
+
+    Previously, the ``status`` key would contain intermediary HTTP status codes.
+
+*   Timeout after 10 seconds when requesting a feed from a URL.
+
+Documentation
+-------------
+
+*   Standardize all ``CHANGELOG.rst`` entries.
+
+*   Replace the individual change history pages in the documentation with the full CHANGELOG.
+
+*   Remove u-prefixes from strings in example code in the documentation.
+
+*   Remove references to feedparser as a single-file module. (#274)
+
+*   Re-host sample feed files on Read the Docs.
+
+    Previously, the code examples referenced ``feedparser.org``, which expired.
+
+*   Use ``code-block`` directives with correct syntax highlighting.
+
+*   Configure Read the Docs to build on Ubuntu 24.04 with Python 3.13.
+
+*   Switch to the ``dirhtml`` builder on Read the Docs.
+
+Project development
+-------------------
+
+*   Migrate to scriv to manage the changelog.
+
+*   Use GitHub Actions for CI testing.
+
+*   Test building the documentation.
+
+*   Add an `EditorConfig <https://editorconfig.org/>`_ configuration.
+*   Add a `pre-commit <https://pre-commit.com/>`_ configuration.
+*   Add a `Dependabot <https://docs.github.com/en/code-security/dependabot>`_ configuration.
+*   Reformat the code and documentation using various linters.
+*   Remove mypy, sphinx, and tox as development dependencies.
+
+*   Update CI to minimize total run time.
+    (The total run time dropped from ~37 minutes to ~8 minutes with cache hits.)
+
+*   Migrate the test suite from unittest to pytest.
+
+*   Use flake8 to lint the code.
+
+*   Track code coverage when running the test suite.
+
+*   Test doc builds against the same theme used on ReadTheDocs.
+
+*   Pin requirements for doc builds and mypy checks.
+
+*   Move 116 encoding test files to ``test_encoding.py``.
+
+*   Use the ``responses`` package to mock HTTP responses in the test suite.
+
+    This removes the need to launch an HTTP server on port 8097 during testing.
+
+*   Support running tox environments in parallel.
+
+*   Escalate warnings to errors when running the test suite.
+
+*   Fix warnings in the test suite that occur in Python 3.12.0a7.
+
+*   Add a pre-commit hook to validate the schema of various configuration files,
+    including the Dependabot, GitHub workflows, and ReadTheDocs configuration files.
+
+    This uses the `check-jsonschema <https://github.com/python-jsonschema/check-jsonschema>`_ pre-commit hook.
+
+*   Optimize CI for efficiency and speed.
+
+*   Migrate to Poetry for cross-platform test suite dependency locking.
+
+*   Configure linters to run on Python 3.13.
+
+*   Migrate to PEP 621 metadata in ``pyproject.toml``.
+
+*   Rename the ``develop`` branch to ``main``,
+    and rename the ``master`` branch to ``releases``.
+
+    To update local branches, run these commands
+    (assuming that the upstream repository is named "origin"):
+
+    ..  code-block:: bash
+
+        # Update local repo knowledge of the upstream repo.
+        git fetch origin
+
+        # Rename and re-home the "develop" branch.
+        git branch -m develop main
+        git branch -u origin/main main
+
+        # Rename and re-home the "master" branch.
+        git branch -m master releases
+        git branch -u origin/releases releases
+
+        # Auto-detect the local repo's HEAD branch.
+        git remote set-head origin -a
+
+*   Migrate the flake8 configuration to ``pyproject.toml`` using
+    the `flake8-toml-config <https://github.com/kurtmckee/flake8-toml-config>`_ plugin.
+
+*   Locally test type annotations against all supported Python versions.
+
+*   Migrate to Poetry for packaging and publishing.
+
+*   Migrate the tox configuration to ``pyproject.toml``.
+
+Breaking changes
+----------------
+
+*   URLs using a ``feed://`` scheme are no longer handled by feedparser.
+
+    Please convert such URLs to ``https://`` (or ``http://``) URLs
+    before passing them to feedparser.
+    This removes an ancient, undocumented internal fallback to HTTP.
+
+*   URLs using a ``file://`` scheme are no longer handled by feedparser.
+
+    Please convert these to standard filesystem paths
+    before passing the path to feedparser.
+    This removes a potential vector by which local paths might be unexpectedly accessed.
+
+*   URLs using an ``ftp://`` scheme are no longer handled by feedparser.
+
+    Please use another package to transport data via FTP
+    before passing the content to feedparser.
+    This removes an untested code path.
+
+*   ``feedparser.parse()`` no longer accepts parameters that customize HTTP requests.
+
+    Specifically, these parameters are no longer accepted:
+
+    *   ``agent``
+    *   ``etag``
+    *   ``modified``
+    *   ``referrer``
+    *   ``handlers``
+    *   ``request_headers``
+
+    If you still need to customize these values,
+    please use an HTTP client like the ``requests`` package to request a URL,
+    then pass the resulting content to ``feedparser.parse()``.
+
+*   TLS certificates are now verified
+    due to default behavior in the ``requests`` package.
+
+    If you need to disable certificate verification,
+    please use an HTTP client like the ``requests`` package to request a URL,
+    then pass the resulting content to ``feedparser.parse()``.
+
+*   feedparser no longer sends a default User-Agent header.
+    In addition, the module-level ``feedparser.USER_AGENT`` variable
+    has been removed and is no longer respected if set.
+
+    feedparser can be used in violation of sites' Terms of Service,
+    and the default User-Agent header incorrectly associated those violations
+    with the project itself.
+
+    It is not tenable to continue receiving notifications from large companies
+    regarding usage violations that has nothing to do with this project
+    and cannot be resolved by project maintainers,
+    so there will no longer be a default User-Agent header
+    that points at the project.
+
+    As has been documented in this project for nearly 20 years,
+    **developers are still encouraged to set an appropriate User-Agent**
+    when making HTTP requests.
+
 6.0.12 - 2025-09-10
 ===================
 
