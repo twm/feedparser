@@ -20,6 +20,16 @@ Please see the fragment files in the `changelog.d directory`_.
 
 ..  scriv-insert-here
 
+.. _changelog-2026.7.1:
+
+2026.7.1 - 2026-07-01
+=====================
+
+Removed
+-------
+
+*   Remove `requests` dependency.
+
 .. _changelog-2026.7.0:
 
 2026.7.0 - 2026-07-01
