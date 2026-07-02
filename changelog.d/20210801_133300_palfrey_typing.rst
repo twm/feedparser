@@ -1,4 +1,0 @@
-Added
------
-
-*   Added typing support (#253)

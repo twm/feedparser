@@ -1,4 +1,0 @@
-Project development
--------------------
-
-*   Use GitHub Actions for CI testing.
